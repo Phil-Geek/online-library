@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>在线图书馆 | 后台管理</title>
+
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/starter.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!--header-->
+    <script src="../model/header.js"></script>
+    <!-- left -->
+    <script src="../model/leftOther.js"></script>
+    <!--content-->
+    <div class="content-wrapper" id="content">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">图书管理</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">主页</a></li>
+                            <li class="breadcrumb-item"><a href="#">图书管理</a></li>
+                            <li class="breadcrumb-item active">图书管理</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 内容体 -->
+        <section class="content">
+            <div class="container-fluid">
+                <!--用户统计-->
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>150</h3>
+                                <p>全部图书</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-block btn-outline-primary btn-lg" onclick="clickAddBook()">添加图书</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>50</h3>
+                                <p>文学类</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>50</h3>
+                                <p>励志类</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>50</h3>
+                                <p>科技类</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">图书列表</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="dataTables_length" id="example1_length">
+                                                <label>显示行数 <select name="example1_length" aria-controls="example1" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 列表</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div id="example1_filter" class="dataTables_filter">
+                                                <label>搜索:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1" /></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="col-md-1">书号</th>
+                                                <th class="col-md-1">书名</th>
+                                                <th class="col-md-1">作者</th>
+                                                <th class="col-md-1">出版社</th>
+                                                <th class="col-md-2">描述</th>
+                                                <th class="col-md-1">分类</th>
+                                                <th class="col-md-1">总量</th>
+                                                <th class="col-md-1">余量</th>
+                                                <th class="col-md-1">位置</th>
+                                                <th class="col-md-2">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="userList">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">上一页</a></li>
+                                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                                                    <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">下一页</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--添加用户弹窗-->
+        <!--弹窗-->
+        <a data-toggle="modal" data-target="#uploadExperimentalDocumentBook" id="uploadExperimental" onclick="return false;"></a>
+        <div class="modal fade" id="uploadExperimentalDocumentBook" tabindex="-1" role="dialog" aria-labelledby="uploadExperimentalDocumentLabel" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <!--上传视频-->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="uploadExperimentalDocumentLabel">添加图书</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+
+                    <!--上传表单-->
+                    <div class="modal-body">
+                        <form id="bookForm" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="bookName" class="control-label">书名</label>
+                                <input type="text" class="form-control" id="bookName" maxlength="200" placeholder="不能超过20字符..." name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="author" class="control-label">作者</label>
+                                <input type="text" class="form-control" id="author" maxlength="200" placeholder="不能超过15字符..." name="authorName">
+                            </div>
+                            <div class="form-group">
+                                <label for="press" class="control-label">出版社</label>
+                                <input type="text" class="form-control" id="press" maxlength="200" placeholder="不能超过20字符..." name="pressName">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="control-label">描述</label>
+                                <input type="text" class="form-control" id="description" maxlength="200" placeholder="不能超过200字符..." name="description">
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="control-label">位置</label>
+                                <input type="text" class="form-control" id="location" maxlength="200" placeholder="不能超过50字符..." name="location">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">选择图书分类</label>
+                                <select class="form-control" id="class" name="bookClass">
+                                    <option>小说</option>
+                                    <option>传记</option>
+                                    <option>文学</option>
+                                    <option>青春文学</option>
+                                    <option>心灵修养</option>
+                                    <option>人生哲学</option>
+                                    <option>职场</option>
+                                    <option>人际交往</option>
+                                    <option>口才</option>
+                                    <option>计算机</option>
+                                    <option>网络</option>
+                                    <option>科普读物</option>
+                                    <option>建筑</option>
+                                    <option>自然科学</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="img" class="control-label">图书封面</label>
+                                <input type="file" class="form-control" id="img" accept="image/*" name="img">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--关闭 上传-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeUpload">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="createBook()">添加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <script src="../model/footer.js"></script>
+</div>
+<script src="../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
+<script src="../js/model.js"></script>
+<script src="js/book.js"></script>
+</body>
+</html>

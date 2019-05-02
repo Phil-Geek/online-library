@@ -12,110 +12,17 @@
     <title>在线图书馆</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="show/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="show/css/core-style.css">
+    <link rel="stylesheet" href="show/css/style.css">
 
 </head>
 
 <body>
     <!-- ##### Header Area Start ##### -->
-    <header class="header_area">
-        <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
-            <!-- Classy Menu -->
-            <nav class="classy-navbar" id="essenceNav">
-                <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                <!-- Navbar Toggler -->
-                <div class="classy-navbar-toggler">
-                    <span class="navbarToggler"><span></span><span></span><span></span></span>
-                </div>
-                <!-- Menu -->
-                <div class="classy-menu">
-                    <!-- close btn -->
-                    <div class="classycloseIcon">
-                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                    </div>
-                    <!-- Nav Start -->
-                    <div class="classynav">
-                        <ul>
-                            <li><a href="#">分类</a>
-                                <div class="megamenu">
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">文艺书架</li>
-                                        <li><a href="shop.html">小说</a></li>
-                                        <li><a href="shop.html">文学</a></li>
-                                        <li><a href="shop.html">传记</a></li>
-                                        <li><a href="shop.html">青春文学</a></li>
-                                    </ul>
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">励志书架</li>
-                                        <li><a href="shop.html">心灵修养</a></li>
-                                        <li><a href="shop.html">人生哲学</a></li>
-                                        <li><a href="shop.html">职场</a></li>
-                                        <li><a href="shop.html">人际交往</a></li>
-                                        <li><a href="shop.html">口才</a></li>
-                                    </ul>
-                                    <ul class="single-mega cn-col-4">
-                                        <li class="title">科技</li>
-                                        <li><a href="shop.html">计算机</a></li>
-                                        <li><a href="shop.html">网络</a></li>
-                                        <li><a href="shop.html">科普读物</a></li>
-                                        <li><a href="shop.html">建筑</a></li>
-                                        <li><a href="shop.html">自然科学</a></li>
-                                    </ul>
-                                    <div class="single-mega cn-col-4">
-                                        <img src="img/bg-img/bg-6.jpg" alt="">
-                                    </div>
-                                </div>
-                            </li>
-                            <li><a href="#">管理</a>
-                                <ul class="dropdown">
-                                    <li><a href="index.html">后台管理</a></li>
-                                    <!-- <li><a href="shop.html">后台管理</a></li> -->
-                                    <!-- <li><a href="single-product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single-blog.html">Single Blog</a></li>
-                                    <li><a href="regular-page.html">Regular Page</a></li>
-                                    <li><a href="contact.html">Contact</a></li> -->
-                                </ul>
-                            </li>
-                            <!-- <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li> -->
-                        </ul>
-                    </div>
-                    <!-- Nav End -->
-                </div>
-            </nav>
-
-            <!-- Header Meta Data -->
-            <div class="header-meta d-flex clearfix justify-content-end">
-                <!-- Search Area -->
-                <div class="search-area">
-                    <form action="#" method="post">
-                        <input type="search" name="search" id="headerSearch" placeholder="搜索">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-                <!-- Favourite Area -->
-                <!-- <div class="favourite-area">
-                    <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
-                </div> -->
-                <!-- User Login Info -->
-                <!-- <div class="user-login-info">
-                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
-                </div> -->
-                <!-- Cart Area -->
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/user.svg" alt=""></a>
-                </div>
-            </div>
-
-        </div>
-    </header>
+    <script src="show/model/header.js"></script>
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Right Side Cart Area ##### -->
@@ -125,7 +32,7 @@
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="img/core-img/user.svg" alt=""></a>
+            <a href="#" id="rightSideCart"><img src="show/img/core-img/user.svg" alt=""></a>
         </div>
 
         <div class="cart-content d-flex">
@@ -135,7 +42,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="show/img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -151,7 +58,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
+                        <img src="show/img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -167,7 +74,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
+                        <img src="show/img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -193,8 +100,8 @@
                     <li><span>借书权限:</span> <span>书籍未还，不可借</span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
-                    <a href="checkout.html" class="btn essence-btn">注销</a>
-                    <a href="checkout.html" class="btn essence-btn">还书</a>
+                    <a href="show/template/checkout.html" class="btn essence-btn">注销</a>
+                    <a href="show/template/checkout.html" class="btn essence-btn">还书</a>
                 </div>
             </div>
         </div>
@@ -202,14 +109,14 @@
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url(img/bg-img/bg-1.jpg);">
+    <section class="welcome_area bg-img background-overlay" style="background-image: url(show/img/bg-img/bg-1.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="hero-content">
                         <h6>ccut</h6>
                         <h2>在线图书馆</h2>
-                        <a href="#" class="btn essence-btn">进入书架</a>
+                        <a href="javascript:void (0);" onclick="enCodeUrl('all')" class="btn essence-btn">进入书架</a>
                     </div>
                 </div>
             </div>
@@ -230,173 +137,29 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="popular-products-slides owl-carousel">
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/product-1.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <!-- <img class="hover-img" src="img/product-img/product-2.jpg" alt=""> -->
-                                <!-- Favourite -->
-                                <!-- <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div> -->
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>分类</span>
-                                <a href="single-product-details.html">
-                                    <h6>Knot Front Mini Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">书籍介绍</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/product-2.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <!-- <img class="hover-img" src="img/product-img/product-3.jpg" alt=""> -->
-                                <!-- Favourite -->
-                                <!-- <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div> -->
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>分类</span>
-                                <a href="single-product-details.html">
-                                    <h6>Poplin Displaced Wrap Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">书籍介绍</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/product-3.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <!-- <img class="hover-img" src="img/product-img/product-4.jpg" alt=""> -->
-
-                                <!-- Product Badge -->
-                                <!-- <div class="product-badge offer-badge">
-                                    <span>-30%</span>
-                                </div> -->
-
-                                <!-- Favourite -->
-                                <!-- <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div> -->
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>分类</span>
-                                <a href="single-product-details.html">
-                                    <h6>PETITE Crepe Wrap Mini Dress</h6>
-                                </a>
-                                <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">书籍介绍</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/product-4.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <!-- <img class="hover-img" src="img/product-img/product-5.jpg" alt=""> -->
-
-                                <!-- Product Badge -->
-                                <!-- <div class="product-badge new-badge">
-                                    <span>New</span>
-                                </div> -->
-
-                                <!-- Favourite -->
-                                <!-- <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div> -->
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>分类</span>
-                                <a href="single-product-details.html">
-                                    <h6>PETITE Belted Jumper Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">书籍介绍</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="bookList">
             </div>
         </div>
     </section>
     <!-- ##### New Arrivals Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-    <footer class="footer_area clearfix">
-        <div class="row mt-5">
-            <div class="col-md-12 text-center">
-                <p>
-                    ccut-在线图书馆
-                </p>
-            </div>
-        </div>
-    </footer>
+    <script src="show/model/footer.js"></script>
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="show/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="show/js/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="show/js/bootstrap.min.js"></script>
     <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
+    <script src="show/js/plugins.js"></script>
     <!-- Classy Nav js -->
-    <script src="js/classy-nav.min.js"></script>
+    <script src="show/js/classy-nav.min.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
-
+    <script src="show/js/active.js"></script>
+    <script src="show/js/index.js"></script>
 </body>
 
 </html>

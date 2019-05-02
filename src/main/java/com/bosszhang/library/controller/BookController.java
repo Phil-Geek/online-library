@@ -26,6 +26,10 @@ public class BookController {
     public String getBook(Integer pageNumber){
         return bookService.getBook(pageNumber);
     }
+    @GetMapping("/getBookById")
+    public String getBookById(String id){
+        return bookService.getBookById(id);
+    }
     @GetMapping("/getBookSumNumber")
     public String getBookSumNumber(){
         return bookService.getBookSumNumber();
@@ -33,6 +37,10 @@ public class BookController {
     @GetMapping("/getBookByClass")
     public String getBookByClass(String bookClass, Integer pageNumber){
         return bookService.getBookByClass(bookClass,pageNumber);
+    }
+    @GetMapping("/getBookTopNumber")
+    public String getBookTopNumber(Integer topNumber){
+        return bookService.getBookTopNumber(topNumber);
     }
 
     @GetMapping("/getBookSumNumberByClass")

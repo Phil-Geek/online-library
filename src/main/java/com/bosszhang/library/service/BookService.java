@@ -101,6 +101,19 @@ public class BookService {
         return jsonObject.toString();
     }
 
+    public String getBookTopNumber(Integer topNumber){
+        JSONObject jsonObject = new JSONObject();
+        Sort sort = new Sort(Sort.Direction.DESC,"modificationTime");
+        Pageable pageable = new PageRequest(0,topNumber,sort);
+        List<Book> books = bookRepository.findAll(pageable).getContent();
+        if (books.size()==0){
+            jsonObject.accumulate("result","error: 暂无书籍");
+            return jsonObject.toString();
+        }
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("data",books);
+        return jsonObject.toString();
+    }
     public String getBookSumNumber(){
         JSONObject jsonObject = new JSONObject();
         int sumNumber = bookRepository.countAll();
@@ -113,7 +126,12 @@ public class BookService {
         JSONObject jsonObject = new JSONObject();
         Sort sort = new Sort(Sort.Direction.DESC,"modificationTime");
         Pageable pageable = new PageRequest(pageNumber-1,bookSize,sort);
-        List<Book> books = bookRepository.findByBookClass(bookClass,pageable).getContent();
+        List<Book> books;
+        if("all".equals(bookClass)){
+            books = bookRepository.findAll(pageable).getContent();;
+        }else {
+            books = bookRepository.findByBookClass(bookClass,pageable).getContent();
+        }
         if (books.size()==0){
             jsonObject.accumulate("result","error: 暂无此类书籍");
             return jsonObject.toString();
@@ -133,6 +151,18 @@ public class BookService {
     public String getBookByBookName(String bookName){
         JSONObject jsonObject = new JSONObject();
         List<Book> books = bookRepository.findByName(bookName);
+        if (books.size()==0){
+            jsonObject.accumulate("result","error: 没有此书");
+            return jsonObject.toString();
+        }
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("data",books);
+        return jsonObject.toString();
+    }
+
+    public String getBookById(String id){
+        JSONObject jsonObject = new JSONObject();
+        List<Book> books = bookRepository.findBookById(id);
         if (books.size()==0){
             jsonObject.accumulate("result","error: 没有此书");
             return jsonObject.toString();

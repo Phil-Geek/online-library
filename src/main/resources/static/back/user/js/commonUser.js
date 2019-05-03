@@ -1,3 +1,6 @@
+var userId="";
+var sumPageNumber=0;
+var currPageNumber=1;
 function createUser() {
     var form = new FormData(document.getElementById("videoForm"));
     var id = form.get("id");
@@ -28,15 +31,19 @@ function createUser() {
             data=JSON.parse(data);
             var result = data.result;
             alert(result);
+            window.location.reload();
         },
         error: function () {
             alert("ajax: 添加普通用户失败");
         }
     });
 }
-function showCommonUserList() {
+function showCommonUserList(pageNumber) {
+    if (pageNumber<1){
+        alert("页码有误");
+        return;
+    }
     var role="普通用户";
-    var pageNumber = 1;
     $.ajax({
         url: "/getUserByRole?role="+role+"&pageNumber="+pageNumber,
         type: "GET",
@@ -51,6 +58,7 @@ function showCommonUserList() {
                 return;
             }
             var userList = data.data;
+            sumPageNumber = data.pageSumNumber;
             var str="";
             var length = userList.length;
             if (length===0){
@@ -65,11 +73,11 @@ function showCommonUserList() {
                     "                                                    <div>\n" +
                     "                                                        <div class=\"row\">\n" +
                     "                                                            <div class=\"col-md-6\">\n" +
-                    "                                                                <button type=\"button\" onclick='updateUser()' class=\"btn btn-block btn-outline-primary btn-sm\">编辑\n" +
+                    "                                                                <button type=\"button\" onclick=\"updateUser('"+ userList[count].id +"')\" class=\"btn btn-block btn-outline-primary btn-sm\">编辑\n" +
                     "                                                                </button>\n" +
                     "                                                            </div>\n" +
                     "                                                            <div class=\"col-md-6\">\n" +
-                    "                                                                <button type=\"button\" onclick=\"deleteCommonUser("+ userList[count].id+")\" class=\"btn btn-block btn-outline-danger btn-sm\">删除\n" +
+                    "                                                                <button type=\"button\" onclick=\"deleteCommonUser('"+ userList[count].id+"')\" class=\"btn btn-block btn-outline-danger btn-sm\">删除\n" +
                     "                                                                </button>\n" +
                     "                                                            </div>\n" +
                     "                                                        </div>\n" +
@@ -79,6 +87,8 @@ function showCommonUserList() {
             }
 
             document.getElementById("userList").innerHTML=str;
+            currPageNumber = pageNumber;
+            showPage();
         },
         error: function () {
             alert("ajax: 添加普通用户失败");
@@ -92,6 +102,7 @@ function deleteCommonUser(id) {
         success: function (data) {
             data=JSON.parse(data);
             alert(data.result);
+            window.location.reload();
         },
         error: function () {
             alert("ajaxError: 删除失败");
@@ -101,9 +112,58 @@ function deleteCommonUser(id) {
 function clickAddUser() {
     document.getElementById("uploadExperimental").click();
 }
-function updateUser() {
+function updateUser(id) {
+    userId = id;
     document.getElementById("updateUser").click();
 }
+function update(){
+    var form = new FormData(document.getElementById("userForm"));
+    var password = form.get("password");
+    $.ajax({
+        url: "/changeUserById?id="+userId+"&password="+password,
+        type: "GET",
+        success: function (data) {
+            data = JSON.parse(data);
+            alert(data.result);
+            window.location.reload()
+        },
+        error: function () {
+            alert("ajaxError: 更新失败");
+        }
+    });
+}
+
+function showPage(){
+    var str = "<ul class=\"pagination\">\n" +
+        "                                                    <li class=\"paginate_button page-item previous disabled\" id=\"example1_previous\"><a href=\"javascript:void(0);\" onclick='gotoPreviousPage()' aria-controls=\"example1\" data-dt-idx=\"0\" tabindex=\"0\" class=\"page-link\">上一页</a></li>";
+    for(var count=0;count<sumPageNumber;count++){
+        str +="<li class=\"paginate_button page-item \" id=\"page"+ (count+1).toString() +"\"><a onclick='showCommonUserList("+ (count+1) +")' aria-controls=\"example1\" data-dt-idx=\"2\" tabindex=\"0\" class=\"page-link\">"+ (count+1) +"</a></li>";
+    }
+    str+="<li class=\"paginate_button page-item next\" id=\"example1_next\"><a onclick='gotoNextPage()' aria-controls=\"example1\" data-dt-idx=\"7\" tabindex=\"0\" class=\"page-link\">下一页</a></li>\n" +
+        "                                                </ul>";
+    document.getElementById("example1_paginate").innerHTML=str;
+    document.getElementById("page"+currPageNumber.toString()).className="paginate_button page-item active";
+    if (sumPageNumber===0||sumPageNumber===1){
+        document.getElementById("example1_previous").className = "paginate_button page-item previous disabled";
+        document.getElementById("example1_next").className = "paginate_button page-item previous disabled";
+    }
+    if (currPageNumber===sumPageNumber){
+        document.getElementById("example1_next").className = "paginate_button page-item previous disabled";
+    }
+    if (currPageNumber<=1){
+        document.getElementById("example1_previous").className = "paginate_button page-item previous disabled";
+    }else {
+        document.getElementById("example1_previous").className = "paginate_button page-item previous";
+    }
+}
+function gotoNextPage(){
+    showCommonUserList(currPageNumber+1);
+}
+function gotoPreviousPage(){
+    if (currPageNumber>1){
+        showCommonUserList(currPageNumber-1);
+    }
+}
 $(document).ready(function () {
-   showCommonUserList();
+   showCommonUserList(currPageNumber);
 });

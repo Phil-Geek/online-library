@@ -96,7 +96,11 @@ public class BookService {
             jsonObject.accumulate("result","error: 暂无书籍");
             return jsonObject.toString();
         }
+        int sumNumber = bookRepository.countAll();
         jsonObject.accumulate("result","success");
+        jsonObject.accumulate("sumNumber",sumNumber);
+        jsonObject.accumulate("pageSumNumber",count(sumNumber));
+        jsonObject.accumulate("currPageNumber",pageNumber);
         jsonObject.accumulate("data",books);
         return jsonObject.toString();
     }
@@ -127,15 +131,21 @@ public class BookService {
         Sort sort = new Sort(Sort.Direction.DESC,"modificationTime");
         Pageable pageable = new PageRequest(pageNumber-1,bookSize,sort);
         List<Book> books;
+        int sumNumber=0;
         if("all".equals(bookClass)){
-            books = bookRepository.findAll(pageable).getContent();;
+            sumNumber = bookRepository.countAll();
+            books = bookRepository.findAll(pageable).getContent();
         }else {
+            sumNumber = bookRepository.countByBookClass(bookClass);
             books = bookRepository.findByBookClass(bookClass,pageable).getContent();
         }
         if (books.size()==0){
             jsonObject.accumulate("result","error: 暂无此类书籍");
             return jsonObject.toString();
         }
+        jsonObject.accumulate("sumNumber",sumNumber);
+        jsonObject.accumulate("pageSumNumber",count(sumNumber));
+        jsonObject.accumulate("currPageNumber",pageNumber);
         jsonObject.accumulate("result","success");
         jsonObject.accumulate("data",books);
         return jsonObject.toString();
@@ -195,7 +205,7 @@ public class BookService {
         }
         Book book = books.get(0);
         int restNumber = book.getRestNumber();
-        if (restNumber>=0){
+        if (restNumber>0){
             String bookId = book.getId();
             int sumNumber = book.getSumNumber();
             restNumber = book.getRestNumber();
@@ -338,7 +348,7 @@ public class BookService {
         Border border = borders.get(0);
         String bookId = border.getBookId();
         String state = border.getOrderState();
-        if (!state.equals("已还待确认")){
+        if (!state.equals("已借")){
             jsonObject.accumulate("result","error: 无法操作此订单");
             return jsonObject.toString();
         }
@@ -356,6 +366,103 @@ public class BookService {
         jsonObject.accumulate("result","success");
         return jsonObject.toString();
     }
+
+    public String getReOrderByUserId(String userId){
+        JSONObject jsonObject = new JSONObject();
+        if ("".equals(userId)||userId==null){
+            jsonObject.accumulate("result","error: 用户Id为空");
+            return jsonObject.toString();
+        }
+        String state = "已借";
+        List<Border> borders = orderRepository.findByUserIdAndOrderState(userId,state);
+        if (borders.size()==0){
+            jsonObject.accumulate("result","error: 用户没有预借书");
+            return jsonObject.toString();
+        }
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("data",borders);
+        return jsonObject.toString();
+    }
+    public String getOrderByUserId(String userId){
+        JSONObject jsonObject = new JSONObject();
+        if ("".equals(userId)||userId==null){
+            jsonObject.accumulate("result","error: 用户Id为空");
+            return jsonObject.toString();
+        }
+        String state = "已借待确认";
+        List<Border> borders = orderRepository.findByUserIdAndOrderState(userId,state);
+        if (borders.size()==0){
+            jsonObject.accumulate("result","error: 用户没有借书");
+            return jsonObject.toString();
+        }
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("data",borders);
+        return jsonObject.toString();
+    }
+    public String cancelBorrow(String userId){
+        String state = "已借待确认";
+        JSONObject jsonObject = new JSONObject();
+        if ("".equals(userId)||userId==null){
+            jsonObject.accumulate("result","error: 用户Id");
+            return jsonObject.toString();
+        }
+        List<Border> borders = orderRepository.findByUserIdAndOrderState(userId,state);
+        if (borders.size()==0){
+            jsonObject.accumulate("result","error: 用户没有预借");
+            return jsonObject.toString();
+        }
+        String bookId = borders.get(0).getBookId();
+        orderRepository.deleteByUserIdAndOrderState(userId,state);
+
+        List<Book> books = bookRepository.findBookById(bookId);
+        if (books.size()==0){
+            jsonObject.accumulate("result","error: 没有此书");
+            return jsonObject.toString();
+        }
+        Book book = books.get(0);
+        int sumNumber = book.getSumNumber();
+        int restNumber = book.getRestNumber();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        bookRepository.updateBookNumber(bookId,sumNumber+1,restNumber+1,timestamp);
+        jsonObject.accumulate("result","success");
+        return jsonObject.toString();
+    }
+
+    public String deleteOrder(String orderId){
+        String state = "已还";
+        JSONObject jsonObject = new JSONObject();
+        if ("".equals(orderId)||orderId==null){
+            jsonObject.accumulate("result","error: 订单号不能为空");
+            return jsonObject.toString();
+        }
+        List<Border> borders = orderRepository.findByIdAndOrderState(orderId,state);
+        if (borders.size()==0){
+            jsonObject.accumulate("result","error: 没有此借阅单");
+            return jsonObject.toString();
+        }
+        orderRepository.deleteByIdAndOrderState(orderId,state);
+        jsonObject.accumulate("result","success");
+        return jsonObject.toString();
+    }
+
+    public String getOrder(Integer pageNumber){
+        JSONObject jsonObject = new JSONObject();
+        Sort sort = new Sort(Sort.Direction.DESC,"modificationTime");
+        Pageable pageable = new PageRequest(pageNumber-1,bookSize,sort);
+        List<Border> borders = orderRepository.findAll(pageable).getContent();
+        if (borders.size()==0){
+            jsonObject.accumulate("result","error: 暂无借阅");
+            return jsonObject.toString();
+        }
+        int sumNumber = orderRepository.countAll();
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("sumNumber",sumNumber);
+        jsonObject.accumulate("pageSumNumber",count(sumNumber));
+        jsonObject.accumulate("currPageNumber",pageNumber);
+        jsonObject.accumulate("data",borders);
+        return jsonObject.toString();
+    }
+
 
 
 

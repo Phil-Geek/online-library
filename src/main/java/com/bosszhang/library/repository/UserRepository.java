@@ -22,4 +22,5 @@ public interface UserRepository extends JpaRepository<User,String> {
     void updateById(String id, String password, Timestamp timestamp);
     Page<User> findByRole(String role, Pageable pageable);
     int countByRole(String role);
+    User findUserById(String id);
 }

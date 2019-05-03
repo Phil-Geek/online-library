@@ -26,6 +26,7 @@ public class BookController {
     public String getBook(Integer pageNumber){
         return bookService.getBook(pageNumber);
     }
+
     @GetMapping("/getBookById")
     public String getBookById(String id){
         return bookService.getBookById(id);
@@ -53,8 +54,8 @@ public class BookController {
         return bookService.getBookByBookName(bookName);
     }
 
-    @GetMapping("/updateBookById")
-    public String updateBookById(String id,String authorName, String description, String bookClass,String pressName){
+    @PostMapping("/updateBookById")
+    public String updateBookById(@RequestParam("id") String id,@RequestParam("authorName") String authorName, @RequestParam("description") String description, @RequestParam("bookClass") String bookClass,@RequestParam("pressName") String pressName){
         return bookService.updateBookById(id,authorName,description,bookClass,pressName);
     }
 
@@ -80,5 +81,29 @@ public class BookController {
     @GetMapping("/confirmReturnBook")
     public String confirmReturnBook(String orderId){
         return bookService.confirmReturnBook(orderId);
+    }
+
+    @GetMapping("/getReOrderByUserId")
+    public String getReOrderByUserId(String userId){
+        return bookService.getReOrderByUserId(userId);
+    }
+
+    @GetMapping("/getOrderByUserId")
+    public String getOrderByUserId(String userId){
+        return bookService.getOrderByUserId(userId);
+    }
+
+    @GetMapping("/cancelBorrow")
+    public String cancelBorrow(String userId){
+        return bookService.cancelBorrow(userId);
+    }
+
+    @GetMapping("/getOrder")
+    public String getOrder(Integer pageNumber){
+        return bookService.getOrder(pageNumber);
+    }
+    @DeleteMapping("/deleteOrder")
+    public String deleteOrder(String orderId){
+        return bookService.deleteOrder(orderId);
     }
 }

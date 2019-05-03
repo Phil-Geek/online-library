@@ -121,25 +121,6 @@
                                             </tr>
                                             </thead>
                                             <tbody id="userList">
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">20172686</td>
-                                                <td>李朋飞</td>
-                                                <td>123456</td>
-                                                <td>
-                                                    <div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-block btn-outline-primary btn-sm">编辑
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button type="button" class="btn btn-block btn-outline-danger btn-sm">删除
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -148,16 +129,6 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">上一页</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                                    <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                                    <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">下一页</a></li>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -213,14 +184,11 @@
         <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="updateUserModalLabel" data-backdrop="static">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-
-                    <!--上传视频-->
                     <div class="modal-header">
                         <h4 class="modal-title" id="updateUserModalLabel">更改信息</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
 
-                    <!--上传表单-->
                     <div class="modal-body">
                         <form id="userForm" method="GET" enctype="multipart/form-data">
                             <div class="form-group">
@@ -229,11 +197,37 @@
                             </div>
                         </form>
                     </div>
-
-                    <!--关闭 上传-->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" id="closeUpdate">关闭</button>
-                        <button type="button" class="btn btn-primary"  onclick="">添加</button>
+                        <button type="button" class="btn btn-primary"  onclick="update()">更新</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a data-toggle="modal" data-target="#loginModal" id="login" onclick="return false;"></a>
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="loginModalLabel">登录</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="id" class="control-label">账号</label>
+                                <input type="text" class="form-control" id="userId" maxlength="200" placeholder="不能超过20字符..." name="id">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="control-label">密码</label>
+                                <input type="password" class="form-control" id="userPassword" maxlength="200" placeholder="不能超过20字符..." name="password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeLogin">关闭</button>
+                        <button type="button" class="btn btn-primary"  onclick="login()">添加</button>
                     </div>
                 </div>
             </div>

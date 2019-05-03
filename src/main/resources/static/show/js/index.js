@@ -52,4 +52,5 @@ function showBookTop() {
 }
 $(document).ready(function () {
     showBookTop();
+    init();
 });

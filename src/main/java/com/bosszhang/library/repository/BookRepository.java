@@ -19,9 +19,9 @@ public interface BookRepository extends JpaRepository<Book, String> {
     Page<Book> findByBookClass(String bookClass,Pageable pageable);
     List<Book> findByName(String name);
     List<Book> findByNameAndPressNameAndAuthorName(String name,String pressName,String authorName);
-    @Modifying
     @Query(value = "SELECT COUNT(*) FROM Book")
     int countAll();
+
     int countByBookClass(String bookClass);
     List<Book> findBookById(String id);
 

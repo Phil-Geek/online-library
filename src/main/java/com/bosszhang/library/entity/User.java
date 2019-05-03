@@ -1,5 +1,7 @@
 package com.bosszhang.library.entity;
 
+import org.json.JSONObject;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
@@ -29,6 +31,15 @@ public class User {
         this.password = password;
         this.createTime = createTime;
         this.modificationTime = modificationTime;
+    }
+    public String toString()
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.accumulate("id", this.id);
+        jsonObject.accumulate("password", this.password);
+        jsonObject.accumulate("name", this.name);
+        jsonObject.accumulate("role", this.role);
+        return jsonObject.toString();
     }
 
     public String getId() {

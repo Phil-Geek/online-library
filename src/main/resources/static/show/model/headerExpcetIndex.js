@@ -47,7 +47,7 @@ document.writeln("                                        <img src=\'../img/bg-i
 document.writeln("                                    </div>");
 document.writeln("                                </div>");
 document.writeln("                            </li>");
-document.writeln("                            <li><a href=\'#\'>管理</a>");
+document.writeln("                            <li id='backEnter' style='visibility: hidden'><a href=\'#\'>管理</a>");
 document.writeln("                                <ul class=\'dropdown\'>");
 document.writeln("                                    <li><a href=\'../../back/starter.html\'>后台管理</a></li>");
 document.writeln("                                </ul>");

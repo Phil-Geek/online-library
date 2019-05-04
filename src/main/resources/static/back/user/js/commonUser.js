@@ -165,5 +165,6 @@ function gotoPreviousPage(){
     }
 }
 $(document).ready(function () {
+    init();
    showCommonUserList(currPageNumber);
 });

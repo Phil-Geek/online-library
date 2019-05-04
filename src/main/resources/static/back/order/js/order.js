@@ -224,5 +224,6 @@ function deleteOrder(orderId){
     });
 }
 $(document).ready(function () {
+    init();
     showCommonUserList(currPageNumber);
 });

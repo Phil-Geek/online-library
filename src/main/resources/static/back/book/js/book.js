@@ -187,5 +187,6 @@ function gotoPreviousPage(){
     }
 }
 $(document).ready(function () {
+    init();
     showBookList(currPageNumber);
 });

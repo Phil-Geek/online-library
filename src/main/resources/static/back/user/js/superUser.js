@@ -162,5 +162,6 @@ function gotoPreviousPage(){
     }
 }
 $(document).ready(function () {
+    init();
     showSuperUserList(currPageNumber);
 });

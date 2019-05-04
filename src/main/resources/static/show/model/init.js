@@ -17,6 +17,10 @@ function login() {
         success: function (data) {
             data=JSON.parse(data);
             console.log(data.result);
+            if (data.result!=="success"){
+                alert(data.result);
+                return;
+            } 
             getUser();
         },
         error: function () {
@@ -55,10 +59,14 @@ function getUser() {
             }
             var user = JSON.parse(data.data);
             userId = user.id;
+            var role = user.role;
+            if (role==="超级管理员"){
+                document.getElementById("backEnter").style.visibility="visible";
+            }
             str="<h2>"+ user.name +"</h2>\n" +
                 "                <ul class=\"summary-table\">\n" +
-                "                    <li><span>账号:</span> <span>"+ user.id +"</span></li>\n" +
-                "                    <li><span>身份:</span> <span>"+ user.role +"</span></li>\n" +
+                "                    <li><span>账号:</span> <span>"+ userId +"</span></li>\n" +
+                "                    <li><span>身份:</span> <span>"+ role +"</span></li>\n" +
                 "                </ul>\n" +
                 "                <div class=\"checkout-btn mt-100\" id='cancelBorrow'>\n" +
                 "                    <a onclick='logout()' class=\"btn essence-btn\">注销</a>\n" +

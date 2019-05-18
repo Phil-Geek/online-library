@@ -1,10 +1,16 @@
 var bookClass="all";
+var bookName = "";
 var sumPageNumber=0;
 var currPageNumber=1;
 function showBookByClass(pageNumber){
-    console.log(bookClass);
+    var url="";
+    if (bookName!==""){
+        url="/search?bookName=" + bookName + "&pageNumber=" + pageNumber;
+    }else{
+        url="/getBookByClass?bookClass=" + bookClass + "&pageNumber=" + pageNumber;
+    }
     $.ajax({
-        url: "/getBookByClass?bookClass=" + bookClass + "&pageNumber=" + pageNumber,
+        url: url,
         type: "GET",
         cache: false,
         processData: false,
@@ -14,7 +20,7 @@ function showBookByClass(pageNumber){
             var result = data.result;
             var str="";
             if (result!=="success"){
-                str="暂无该类书籍";
+                str="暂无相关书籍";
                 document.getElementById("bookList").innerHTML=str;
                 return;
             }
@@ -32,9 +38,7 @@ function showBookByClass(pageNumber){
                     "                                    <!-- Product Description -->\n" +
                     "                                    <div class=\"product-description\">\n" +
                     "                                        <span>"+bookList[count].bookClass +"</span>\n" +
-                    "                                        <a href=\"detail.html\">\n" +
                     "                                            <h6>"+ bookList[count].name +"</h6>\n" +
-                    "                                        </a>\n" +
                     "                                        <p class=\"product-price\">余量: "+ bookList[count].restNumber +"</p>\n" +
                     "\n" +
                     "                                        <!-- Hover Content -->\n" +
@@ -50,6 +54,7 @@ function showBookByClass(pageNumber){
             }
             document.getElementById("bookList").innerHTML=str;
             currPageNumber = pageNumber;
+            bookName = "";
             showPage();
         },
         error: function () {
@@ -63,7 +68,12 @@ function GetBookClass() {
     if (url.indexOf("?") !== -1) {
         var str = url.substr(1);
         var param = str.split("=");
-        bookClass = decodeURI(param[1]);
+        var type = param[0];
+        if (type==="search"){
+            bookName = decodeURI(param[1]);
+        }else {
+            bookClass = decodeURI(param[1]);
+        }
     }
 }
 

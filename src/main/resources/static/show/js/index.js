@@ -27,16 +27,14 @@ function showBookTop() {
                         "                                    <!-- Product Description -->\n" +
                         "                                    <div class=\"product-description\">\n" +
                         "                                        <span>"+bookList[count].bookClass +"</span>\n" +
-                        "                                        <a href=\"detail.html\">\n" +
                         "                                            <h6>"+ bookList[count].name +"</h6>\n" +
-                        "                                        </a>\n" +
                         "                                        <p class=\"product-price\">余量: "+ bookList[count].restNumber +"</p>\n" +
                         "\n" +
                         "                                        <!-- Hover Content -->\n" +
                         "                                        <div class=\"hover-content\">\n" +
                         "                                            <!-- Add to Cart -->\n" +
                         "                                            <div class=\"add-to-cart-btn\">\n" +
-                        "                                                <a href=\"./detail.html?bookId="+ bookList[count].id +"\" class=\"btn essence-btn\">书籍介绍</a>\n" +
+                        "                                                <a href=\"show/template/detail.html?bookId="+ bookList[count].id +"\" class=\"btn essence-btn\">书籍介绍</a>\n" +
                         "                                            </div>\n" +
                         "                                        </div>\n" +
                         "                                    </div>\n" +

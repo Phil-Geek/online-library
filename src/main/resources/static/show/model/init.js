@@ -20,7 +20,7 @@ function login() {
             if (data.result!=="success"){
                 alert(data.result);
                 return;
-            } 
+            }
             getUser();
         },
         error: function () {

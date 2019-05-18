@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -19,7 +20,7 @@ public interface BookRepository extends JpaRepository<Book, String> {
     Page<Book> findByBookClass(String bookClass,Pageable pageable);
     List<Book> findByName(String name);
     List<Book> findByNameAndPressNameAndAuthorName(String name,String pressName,String authorName);
-    @Query(value = "SELECT COUNT(*) FROM Book")
+    @Query(value = "SELECT COUNT (*) FROM Book")
     int countAll();
 
     int countByBookClass(String bookClass);
@@ -35,7 +36,9 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     void deleteById(String id);
 
+    Page<Book> findByNameLike(@Param("bookName") String bookName,Pageable pageable);
 
+    int countByNameLike(@Param("bookName") String bookName);
 
 
 

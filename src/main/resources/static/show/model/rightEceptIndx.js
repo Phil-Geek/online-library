@@ -20,7 +20,7 @@ document.writeln("                        </form>");
 document.writeln("                    </div>");
 document.writeln("                    <div class=\'modal-footer\'>");
 document.writeln("                        <button type=\'button\' class=\'btn btn-default\' data-dismiss=\'modal\' id=\'closeLogin\'>关闭</button>");
-document.writeln("                        <button type=\'button\' class=\'btn btn-primary\'  onclick=\'login()\'>添加</button>");
+document.writeln("                        <button type=\'button\' class=\'btn btn-primary\'  onclick=\'login()\'>登录</button>");
 document.writeln("                    </div>");
 document.writeln("                </div>");
 document.writeln("            </div>");

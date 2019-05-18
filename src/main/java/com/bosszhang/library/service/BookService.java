@@ -214,21 +214,21 @@ public class BookService {
             return jsonObject.toString();
         }
         String bookName = book.getName();
+        List<Border> borderBo = orderRepository.getAllByBookNameAndOrderState(bookName,"已借待确认");
+        if (borderBo.size()!=0){
+            jsonObject.accumulate("result","error: 此书还有未确认者，不能删除");
+            return jsonObject.toString();
+        }
         List<Border> borders = orderRepository.getAllByBookNameAndOrderState(bookName,"已借");
         if (borders.size()!=0){
             jsonObject.accumulate("result","error: 此书还有未还者，不能删除");
             return jsonObject.toString();
         }
         File img = new File(books.get(0).getImgLocalUrl());
-        if (!img.exists()){
-            jsonObject.accumulate("result","error: 图片未找到");
-            return jsonObject.toString();
-        }
         try {
             img.delete();
         }catch (Exception e){
-            jsonObject.accumulate("result","error: "+ e.getMessage());
-            return jsonObject.toString();
+            System.out.println(e.getMessage());
         }
         bookRepository.deleteById(id);
         List<Book> books1 = bookRepository.findBookById(id);
@@ -262,7 +262,7 @@ public class BookService {
             return jsonObject.toString();
         }
         List<Border> orders2 = orderRepository.findByUserIdAndOrderState(userId,"已借待确认");
-        if (borders.size()!=0){
+        if (orders2.size()!=0){
             jsonObject.accumulate("result","error: 对不起，您有一本书正在等待管理员确认，现在无法借书");
             return jsonObject.toString();
         }
@@ -463,8 +463,27 @@ public class BookService {
         return jsonObject.toString();
     }
 
-
-
+    public String search(String bookName,Integer pageNumber){
+        JSONObject jsonObject = new JSONObject();
+        if ("".equals(bookName)||bookName==null){
+            jsonObject.accumulate("result","error: 搜索书名不能为空");
+            return jsonObject.toString();
+        }
+        Sort sort = new Sort(Sort.Direction.DESC,"modificationTime");
+        Pageable pageable = new PageRequest(pageNumber-1,bookSize,sort);
+        List<Book> books = bookRepository.findByNameLike("%"+bookName+"%",pageable).getContent();
+        if (books.size()==0){
+            jsonObject.accumulate("result","error: 未找到搜索书籍");
+            return jsonObject.toString();
+        }
+        int sumNumber = bookRepository.countByNameLike("%"+bookName+"%");
+        jsonObject.accumulate("result","success");
+        jsonObject.accumulate("sumNumber",sumNumber);
+        jsonObject.accumulate("pageSumNumber",count(sumNumber));
+        jsonObject.accumulate("currPageNumber",pageNumber);
+        jsonObject.accumulate("data",books);
+        return jsonObject.toString();
+    }
 
     private int count(int sumVideoCount){
         int sumVideoPageCount;

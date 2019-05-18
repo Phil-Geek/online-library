@@ -62,9 +62,9 @@ document.writeln("            <!-- Header Meta Data -->");
 document.writeln("            <div class=\'header-meta d-flex clearfix justify-content-end\'>");
 document.writeln("                <!-- Search Area -->");
 document.writeln("                <div class=\'search-area\'>");
-document.writeln("                    <form action=\'#\' method=\'post\'>");
+document.writeln("                    <form action='show/template/shop.html'>");
 document.writeln("                        <input type=\'search\' name=\'search\' id=\'headerSearch\' placeholder=\'搜索\'>");
-document.writeln("                        <button type=\'submit\'><i class=\'fa fa-search\' aria-hidden=\'true\'></i></button>");
+document.writeln("                        <button type=\'button\' onclick='code()'><i class=\'fa fa-search\' aria-hidden=\'true\'></i></button>");
 document.writeln("                    </form>");
 document.writeln("                </div>");
 document.writeln("                <!-- Favourite Area -->");
@@ -85,4 +85,11 @@ document.writeln("        </div>");
 document.writeln("    </header>");
 function enCodeUrl(bookClass) {
     window.location.href=encodeURI("show/template/shop.html?bookClass="+bookClass);
+}
+function code() {
+    var bookName = document.getElementById("headerSearch").value;
+    if (bookName===""||bookName===null){
+        return
+    }
+    window.location.href=encodeURI("show/template/shop.html?search="+bookName);
 }

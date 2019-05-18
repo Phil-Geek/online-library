@@ -106,4 +106,8 @@ public class BookController {
     public String deleteOrder(String orderId){
         return bookService.deleteOrder(orderId);
     }
+    @GetMapping("/search")
+    public String search(String bookName,Integer pageNumber){
+        return bookService.search(bookName,pageNumber);
+    }
 }

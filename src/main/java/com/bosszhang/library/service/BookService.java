@@ -38,8 +38,7 @@ public class BookService {
     @Value("${book.size}")
     private int bookSize;
 
-    public String createBook(String name, String location, String pressName, String authorName, String bookClass
-    , String description, MultipartFile img){
+    public String createBook(String name, String location, String pressName, String authorName, String bookClass, String description, MultipartFile img){
         JSONObject jsonObject = new JSONObject();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         List<Book> books = bookRepository.findByNameAndPressNameAndAuthorName(name,pressName,authorName);
